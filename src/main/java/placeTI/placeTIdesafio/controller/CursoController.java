@@ -26,25 +26,21 @@ public class CursoController {
     @Autowired
     private CursoRepository cursoRepository;
 
-    // Operação GET para buscar todos os cursos
     @GetMapping("/")
     public List<Curso> getAllCursos() {
         return cursoRepository.findAll();
     }
 
-    // Operação GET para buscar um curso por ID
     @GetMapping("/{id}")
     public Curso getCursoById(@PathVariable Long id) {
         return cursoRepository.findById(id).orElse(null);
     }
 
-    // Operação POST para criar um novo curso
     @PostMapping("/")
     public Curso createCurso(@RequestBody Curso curso) {
         return cursoService.createCurso(curso);
     }
 
-    // Operação PUT para atualizar um curso existente
     @PutMapping("/{id}")
     public Curso updateCurso(@PathVariable Long id, @RequestBody Curso novoCurso) {
         return cursoRepository.findById(id)
@@ -60,7 +56,6 @@ public class CursoController {
             });
     }
 
-    // Operação DELETE para excluir um curso por ID
     @DeleteMapping("/{id}")
     public void deleteCurso(@PathVariable Long id) {
         cursoRepository.deleteById(id);

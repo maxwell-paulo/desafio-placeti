@@ -17,7 +17,6 @@ public class Curso {
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<Turma> turmas;
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }

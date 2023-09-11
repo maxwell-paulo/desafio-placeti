@@ -26,25 +26,21 @@ public class TurmaController {
     @Autowired
     private TurmaRepository turmaRepository;
 
-    // Operação GET para buscar todas as turmas
     @GetMapping("/")
     public List<Turma> getAllTurmas() {
         return turmaRepository.findAll();
     }
 
-    // Operação GET para buscar uma turma por ID
     @GetMapping("/{id}")
     public Turma getTurmaById(@PathVariable Long id) {
         return turmaRepository.findById(id).orElse(null);
     }
 
-    // Operação POST para criar uma nova turma
     @PostMapping("/")
     public Turma createTurma(@RequestBody Turma turma) {
         return turmaService.criarTurma(turma);
     }
 
-    // Operação PUT para atualizar uma turma existente
     @PutMapping("/{id}")
     public Turma updateTurma(@PathVariable Long id, @RequestBody Turma novaTurma) {
         return turmaRepository.findById(id)
@@ -60,7 +56,6 @@ public class TurmaController {
             });
     }
 
-    // Operação DELETE para excluir uma turma por ID
     @DeleteMapping("/{id}")
     public void deleteTurma(@PathVariable Long id) {
         turmaRepository.deleteById(id);

@@ -28,7 +28,7 @@ public class CursoService {
     public Curso createCurso(@RequestBody Curso novoCurso2) {
     Curso novoCurso = new Curso();
     novoCurso.setNome(novoCurso2);
-    return createCurso(novoCurso); // Use criarCurso() em vez de cursoService.criarCurso()
+    return createCurso(novoCurso);
 }
     
 
@@ -40,33 +40,25 @@ public class CursoService {
         cursoRepository.deleteById(id);
     }
 
-    // Método para criar e associar turmas a um curso
     public Curso criarEAssociarTurma(Long cursoId, String codigoTurma, String nomeTurma) {
         Curso curso = buscarCursoPorId(cursoId);
         if (curso != null) {
-            // Cria uma nova instância de turma
             Turma turma = new Turma();
             turma.setCodigo(codigoTurma);
             turma.setNome(nomeTurma);
 
-            // Associa a turma ao curso
             turma.setCurso(curso);
 
-            // Salva a turma no repositório de turmas
             turma = turmaService.criarTurma(turma);
 
-            // Atualiza a lista de turmas no curso
             List<Turma> turmas = curso.getTurmas();
             turmas.add(turma);
             curso.setTurmas(turmas);
 
-            // Salva o curso atualizado no repositório de cursos
             return cursoRepository.save(curso);
         }
-        return null; // Curso não encontrado
+        return null;
     }
-
-    // Outros métodos e lógica relacionados aos cursos
 
 }
 
